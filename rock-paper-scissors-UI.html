@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Rock, Paper, Scissors</title>
+</head>
+
+<body>
+	<h1>Rock, Paper, Scissors: Who will win?</h1>
+
+</body>
+</html>
+
+<script>
+	// This function generates a random number between 0 and 3 and
+	// assigns the randomly generated number a string result of 
+	// either rock, paper, or scissors.
+
+	function computerPlay() {
+		let computerNumber = Math.floor((Math.random() * 3));
+		
+		if (computerNumber === 0) {
+			return 'rock';
+		} else if (computerNumber === 1) {
+			return 'paper';
+		} else if (computerNumber === 2) {
+			return 'scissors';
+		} else {
+			return 'rock';
+		}
+	}
+
+
+	// This function plays a round of rock paper scissors against 
+	// the computer, using input from the user and a randomly generated 
+	// result on the part of the computer. 
+
+	function playRound(playerSelection, computerSelection) {
+		if (playerSelection === computerSelection ) {
+			return 'You tied!';
+		} else if (playerSelection === 'rock' && computerSelection === 'paper') {
+			return 'You lose! Paper beats rock.';
+		} else if (playerSelection === 'rock' && computerSelection === 'scissors') {
+			return 'You win! Rock pulverizes scissors.';
+		} else if (playerSelection === 'paper' && computerSelection === 'rock') {
+			return 'You win! Paper smothers rock.';
+		} else if (playerSelection === 'paper' && computerSelection === 'scissors') {
+			return 'You lose! Scissors slice paper.';
+		} else if (playerSelection === 'scissors' && computerSelection === 'rock') {
+			return 'You lose! Rock smashes scissors.';
+		} else if (playerSelection === 'scissors' && computerSelection === 'paper') {
+			return 'You win! Scissors makes short work of paper.' ;
+		} else {
+			return 'Error. What did you do wrong?';
+		}
+	}
+
+	// This function plays 5 rounds of RPS using the computerSelection
+	// and the playerSelection entered into a prompt. It reports the 
+	// running score and determines the winner at the end of 5 games.
+
+	function game() {
+			let computerScore = 0;
+			let playerScore = 0;
+			let tieGame = 0;
+
+		for (var i = 0; i < 5; i++) {
+			
+			let playerSelection = prompt("Rock, paper, or scissors?").toLowerCase();
+			let computerSelection = computerPlay();
+
+			if (playRound(playerSelection, computerSelection).includes("win")) {
+				playerScore++;
+			} else if (playRound(playerSelection, computerSelection).includes("lose")) {
+				computerScore++;
+			} else if (playRound(playerSelection, computerSelection).includes("tied")) {
+				tieGame++;
+			}
+			
+			console.log(playRound(playerSelection, computerSelection));
+
+			console.log(`PLAYER: ${playerScore}, COMPUTER: ${computerScore}, TIE(S): ${tieGame}.`);
+		}
+		
+
+		if (computerScore == playerScore) {
+			console.log('The game is a tie, lame.');
+		} else if (computerScore > playerScore) {
+			console.log('The computer won, waaaahh.');
+		} else if (computerScore < playerScore) {
+			console.log('You won the game!');
+		}
+	}
+
+	game();
+
+</script>
