@@ -11,6 +11,9 @@
 	<button id="pape-btn">Paper</button>
 	<button id="scis-btn">Scissors</button>
 
+	<div id="results">
+	</div>
+
 </body>
 </html>
 
@@ -33,6 +36,7 @@
 		}
 	}
 
+	let computerSelection = computerPlay();
 
 	// This function plays a round of rock paper scissors against 
 	// the computer, using input from the user and a randomly generated 
@@ -63,13 +67,12 @@
 	// running score and determines the winner at the end of 5 games.
 
 	function game() {
+		for (var i = 0; i < 5; i++) {
 			let computerScore = 0;
 			let playerScore = 0;
 			let tieGame = 0;
-
-		for (var i = 0; i < 5; i++) {
 			
-			let playerSelection = prompt("Rock, paper, or scissors?").toLowerCase();
+			let playerSelection;
 			let computerSelection = computerPlay();
 
 			if (playRound(playerSelection, computerSelection).includes("win")) {
@@ -78,13 +81,12 @@
 				computerScore++;
 			} else if (playRound(playerSelection, computerSelection).includes("tied")) {
 				tieGame++;
-			}
-			
-			console.log(playRound(playerSelection, computerSelection));
+		}
+	}
+
+		console.log(playRound(playerSelection, computerSelection));
 
 			console.log(`PLAYER: ${playerScore}, COMPUTER: ${computerScore}, TIE(S): ${tieGame}.`);
-		}
-		
 
 		if (computerScore == playerScore) {
 			console.log('The game is a tie, lame.');
@@ -95,6 +97,34 @@
 		}
 	}
 
-	game();
+	// Here comes the DOM manipulation, hold on to your hat.
+	// What is our issue at this time? The page loads,
+	// you click a button and it plays a round of rock,
+	// paper, scissors. But if you keep clicking the same
+	// button, you keep getting the same result.
+
+	let rockbtn = document.querySelector('#rock-btn');
+	let papebtn = document.querySelector('#pape-btn');
+	let scisbtn = document.querySelector('#scis-btn');
+
+	rockbtn.addEventListener('click', () => {
+		playerSelection = 'rock';
+		computerSelection = computerPlay();
+		document.getElementById("results").innerHTML = playRound(playerSelection, computerSelection);
+	})
+
+	papebtn.addEventListener('click', () => {
+		playerSelection = 'paper';
+		computerSelection = computerPlay();
+		document.getElementById("results").innerHTML = playRound(playerSelection, computerSelection);
+	})
+
+	scisbtn.addEventListener('click', () => {
+		playerSelection = 'scissors';
+		computerSelection = computerPlay();
+		document.getElementById("results").innerHTML = playRound(playerSelection, computerSelection);
+	})
+
+
 
 </script>
