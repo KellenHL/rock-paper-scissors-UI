@@ -50,18 +50,25 @@
 
 	function playRound(playerSelection, computerSelection) {
 		if (playerSelection === computerSelection ) {
+			tieGames++;
 			return 'You tied!';
 		} else if (playerSelection === 'rock' && computerSelection === 'paper') {
+			computerScore++;
 			return 'You lose! Paper beats rock.';
 		} else if (playerSelection === 'rock' && computerSelection === 'scissors') {
+			playerScore++;
 			return 'You win! Rock pulverizes scissors.';
 		} else if (playerSelection === 'paper' && computerSelection === 'rock') {
+			playerScore++;
 			return 'You win! Paper smothers rock.';
 		} else if (playerSelection === 'paper' && computerSelection === 'scissors') {
+			computerScore++;
 			return 'You lose! Scissors slice paper.';
 		} else if (playerSelection === 'scissors' && computerSelection === 'rock') {
+			computerScore++;
 			return 'You lose! Rock smashes scissors.';
 		} else if (playerSelection === 'scissors' && computerSelection === 'paper') {
+			playerScore++;
 			return 'You win! Scissors makes short work of paper.' ;
 		} else {
 			return 'Error. What did you do wrong?';
@@ -75,17 +82,10 @@
 	let tieGames = 0;
 
 	function updateScore() {
-		if (playRound().includes("win")) {
-			playerScore++;
-		} else if (playRound().includes("lose")) {
-			computerScore++;
-		} else if (playRound().includes("tied")) {
-			tieGames++;
-		}
 
-	document.getElementById("player-score").innerHTML = playerScore;
-	document.getElementById("computer-score").innerHTML = computerScore;
-	document.getElementById("tie-games").innerHTML = tieGames;
+	document.getElementById("player-score").innerHTML = `WINS: ${playerScore}`;
+	document.getElementById("computer-score").innerHTML = `LOSSES: ${computerScore}`;
+	document.getElementById("tie-games").innerHTML = `TIED GAME(S): ${tieGames}`;
 	}
 
 	let rockbtn = document.querySelector('#rock-btn');
