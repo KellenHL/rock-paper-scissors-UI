@@ -20,6 +20,8 @@
 
 	<p id="tie-games"></p>
 
+	<p id="winner"></p>
+
 </body>
 </html>
 
@@ -81,6 +83,16 @@
 	let computerScore = 0;
 	let tieGames = 0;
 
+	function reportWinner() {
+		if (playerScore === 3 && playerScore > computerScore) {
+			document.getElementById("winner").innerHTML = "Player Wins!";
+		} else if (computerScore === 3 && computerScore > playerScore) {
+			document.getElementById("winner").innerHTML = "Computer Wins!";
+		} else if (computerScore === playerScore && computerScore > 1 && tieGames === 1) {
+			document.getElementById("winner").innerHTML = "Tie Game.";
+		}
+	}
+
 	function updateScore() {
 
 	document.getElementById("player-score").innerHTML = `WINS: ${playerScore}`;
@@ -97,6 +109,7 @@
 		computerSelection = computerPlay();
 		document.getElementById("results").innerHTML = playRound(playerSelection, computerSelection);
 		updateScore();
+		reportWinner();
 	})
 
 	papebtn.addEventListener('click', () => {
@@ -104,6 +117,7 @@
 		computerSelection = computerPlay();
 		document.getElementById("results").innerHTML = playRound(playerSelection, computerSelection);
 		updateScore();
+		reportWinner();
 	})
 
 	scisbtn.addEventListener('click', () => {
@@ -111,6 +125,7 @@
 		computerSelection = computerPlay();
 		document.getElementById("results").innerHTML = playRound(playerSelection, computerSelection);
 		updateScore();
+		reportWinner();
 	})
 
 	
