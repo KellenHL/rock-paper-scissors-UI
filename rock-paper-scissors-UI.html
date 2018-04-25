@@ -14,8 +14,11 @@
 	<div id="results">
 	</div>
 
-	<p id="current-score">
-	</p>
+	<p id="player-score"></p>
+
+	<p id="computer-score"></p>
+
+	<p id="tie-games"></p>
 
 </body>
 </html>
@@ -67,6 +70,24 @@
 
 	// DOM manipulation
 
+	let playerScore = 0;
+	let computerScore = 0;
+	let tieGames = 0;
+
+	function updateScore() {
+		if (playRound().includes("win")) {
+			playerScore++;
+		} else if (playRound().includes("lose")) {
+			computerScore++;
+		} else if (playRound().includes("tied")) {
+			tieGames++;
+		}
+
+	document.getElementById("player-score").innerHTML = playerScore;
+	document.getElementById("computer-score").innerHTML = computerScore;
+	document.getElementById("tie-games").innerHTML = tieGames;
+	}
+
 	let rockbtn = document.querySelector('#rock-btn');
 	let papebtn = document.querySelector('#pape-btn');
 	let scisbtn = document.querySelector('#scis-btn');
@@ -75,43 +96,24 @@
 		playerSelection = 'rock';
 		computerSelection = computerPlay();
 		document.getElementById("results").innerHTML = playRound(playerSelection, computerSelection);
+		updateScore();
 	})
 
 	papebtn.addEventListener('click', () => {
 		playerSelection = 'paper';
 		computerSelection = computerPlay();
 		document.getElementById("results").innerHTML = playRound(playerSelection, computerSelection);
+		updateScore();
 	})
 
 	scisbtn.addEventListener('click', () => {
 		playerSelection = 'scissors';
 		computerSelection = computerPlay();
 		document.getElementById("results").innerHTML = playRound(playerSelection, computerSelection);
+		updateScore();
 	})
 
-	// @KellenHL On every 'tick' of your program, you could select something like 
-	// a <p> tag and update the inner text of it to the score
-	// You could use multiple <p> tags, template literals, or something 
-	// of that sort
-
-	function scoreCounter() {
-		let playerScore = 0;
-		let computerScore = 0;
-		let tieGame = 0;
-
-		if (document.getElementById("results").includes("win")) {
-			playerScore++;
-		} else if (document.getElementById("results").includes("lose")) {
-			computerScore++;
-		} else if (document.getElementById("results").includes("tied")) {
-			tieGame++;
-		}
-
-		document.getElementById("current-score").innerHTML 
-
-	}
-
-
+	
 
 
 
